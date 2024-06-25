@@ -1,0 +1,16 @@
+{
+    "name": "codewars",
+    "version": "1.0.0",
+    "description": "This repository contains solutions to various katas from Codewars.",
+    "main": "index.js",
+    "scripts": {
+        "generate": "node index.js"
+    },
+    "author": "Daniele De Luca",
+    "license": "MIT",
+    "type": "module",
+    "devDependencies": {
+        "lodash.template": "^4.5.0",
+        "picocolors": "^1.0.1"
+    }
+}
