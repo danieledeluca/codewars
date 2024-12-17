@@ -24,19 +24,24 @@ async function generateKataFolder() {
     const json = await response.json();
     const { name, slug, url, rank, description } = json;
 
-    if (!fs.existsSync(slug)) {
-        fs.mkdirSync(slug);
+    const parsedRankName = rank.name.replace(' ', '-');
 
-        const kyuImageUrl = `https://img.shields.io/badge/${rank.name.replace(
-            ' ',
-            '-'
-        )}-white?style=for-the-badge&labelColor=${rank.color}&color=%23212121`;
+    if (!fs.existsSync(parsedRankName)) {
+        fs.mkdirSync(parsedRankName);
+    }
+
+    const kataFolder = `${parsedRankName}/${slug}`;
+
+    if (!fs.existsSync(kataFolder)) {
+        fs.mkdirSync(kataFolder);
+
+        const kyuImageUrl = `https://img.shields.io/badge/${parsedRankName}-white?style=for-the-badge&labelColor=${rank.color}&color=%23212121`;
         const readmeContent = template(readmeTemplate)({ name, url, kyu: rank.name, kyuImageUrl, description });
 
-        fs.writeFileSync(`${slug}/README.md`, readmeContent);
-        fs.writeFileSync(`${slug}/index.js`, '');
+        fs.writeFileSync(`${kataFolder}/README.md`, readmeContent);
+        fs.writeFileSync(`${kataFolder}/index.js`, '');
 
-        console.log(`${pc.gray(slug)} ${pc.green('folder created')}`);
+        console.log(`${pc.gray(kataFolder)} ${pc.green('folder created')}`);
     } else {
         console.log(`${pc.red('Folder already exists')}`);
     }
