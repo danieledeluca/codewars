@@ -39,7 +39,7 @@ async function generateKataFolder() {
         const readmeContent = template(readmeTemplate)({ name, url, kyu: rank.name, kyuImageUrl, description });
 
         fs.writeFileSync(`${kataFolder}/README.md`, readmeContent);
-        fs.writeFileSync(`${kataFolder}/index.js`, '');
+        fs.writeFileSync(`${kataFolder}/index.js`, `\n\n// Examples\n\n\n// Tests\n\n`);
 
         console.log(`${pc.gray(kataFolder)} ${pc.green('folder created')}`);
     } else {
